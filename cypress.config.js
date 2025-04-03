@@ -16,9 +16,9 @@ const { allureCypress } = require ("allure-cypress/reporter");
 // import { allureCypress } from "allure-cypress/reporter";
 // import cypressOnFix from "cypress-on-fix";
 
-// module.exports = 
+module.exports = defineConfig({
 
-export default defineConfig({
+// export default defineConfig({
   e2e: {
     specPattern:"cypress/e2e/features/*.feature",
     viewportWidth: 1440,
