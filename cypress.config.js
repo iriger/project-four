@@ -1,17 +1,19 @@
-import { defineConfig } from "Cypress";
-import {addCucumberPreprocessorPlugin} from "@badeball/cypress-cucumber-preprocessor";
-import createBundler  from "@bahmutov/cypress-esbuild-preprocessor";
-import esbuildPlugin from "@badeball/cypress-cucumber-preprocessor/esbuild";
+// import { defineConfig } from "Cypress";
+// import {addCucumberPreprocessorPlugin} from "@badeball/cypress-cucumber-preprocessor";
+// import createBundler  from "@bahmutov/cypress-esbuild-preprocessor";
+// import esbuildPlugin from "@badeball/cypress-cucumber-preprocessor/esbuild";
 
 
 
 
-// const { defineConfig } = require("cypress");
-// const {addCucumberPreprocessorPlugin}=require ("@badeball/cypress-cucumber-preprocessor");
-// const createBundler = require ("@bahmutov/cypress-esbuild-preprocessor");
-// const esbuildPlugin= require ("@badeball/cypress-cucumber-preprocessor/esbuild");
+const { defineConfig } = require("cypress");
+const {addCucumberPreprocessorPlugin}=require ("@badeball/cypress-cucumber-preprocessor");
+const createBundler = require ("@bahmutov/cypress-esbuild-preprocessor");
+const esbuildPlugin= require ("@badeball/cypress-cucumber-preprocessor/esbuild");
 // const {default:createEsbuildPlugin}=require("@badeball/cypress-cucumber-preprocessor");
-import { allureCypress } from "allure-cypress/reporter";
+
+const { allureCypress } = require ("allure-cypress/reporter");
+// import { allureCypress } from "allure-cypress/reporter";
 // import cypressOnFix from "cypress-on-fix";
 
 // module.exports = 
