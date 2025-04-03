@@ -31,7 +31,8 @@ jobs:
 
       - name: Generate Allure Report
         run: |
-          npm run allure:generate
+          allure serve allure-results
+          # npm run allure:generate
           mkdir -p public/allure-report
           mv allure-report/* public/allure-report/
 
