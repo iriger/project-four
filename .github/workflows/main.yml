@@ -12,8 +12,11 @@ jobs:
           distribution: zulu
           java-version: 17
 
-      - name: Run tests
-        run: ./gradlew clean test
+      - name: Run Cypress tests
+        run: npx cypress run
+
+      # - name: Run tests
+      #   run: ./gradlew clean test
 
       - name: Load test report history
         uses: actions/checkout@v3
