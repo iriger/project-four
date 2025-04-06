@@ -16,13 +16,17 @@ const { allureCypress } = require ("allure-cypress/reporter");
 // import { allureCypress } from "allure-cypress/reporter";
 // import cypressOnFix from "cypress-on-fix";
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 module.exports = defineConfig({
 
 // export default defineConfig({
   e2e: {
     specPattern:"cypress/e2e/features/*.feature",
     viewportWidth: 1440,
-    baseUrl: "https://telnyx.com",
+    baseUrl: process.env.CYPRESS_BASE_URL,
+    // baseUrl: "https://telnyx.com",
     watchForFileChanges: false,
     async setupNodeEvents(on, config) {
       // implement node event listeners here
