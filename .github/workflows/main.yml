@@ -1,33 +1,19 @@
-name: Deploy Allure Report to GitHub Pages
-
-on:
-  push:
-    branches:
-      - main
-
+name: Run tests and publish report
+on: [push]
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-    env:
-      BASE_URL: "https://telnyx.com/"
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
         with:
-          node-version: '18'
+          distribution: zulu
+          java-version: 17
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run Cypress tests
-        run: npx cypress run
-
-      - name: Install Allure
-        run: npm install -D allure-commandline
+      - name: Run tests
+        run: ./gradlew clean test
 
       - name: Load test report history
         uses: actions/checkout@v3
@@ -45,13 +31,97 @@ jobs:
           allure_history: allure-history
           allure_results: build/allure-results
 
-      - name: Publish report
+      - name: Publish test report
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# name: Deploy Allure Report to GitHub Pages
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     env:
+#       BASE_URL: "https://telnyx.com/"
+
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
+
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: '18'
+
+#       - name: Install dependencies
+#         run: npm install
+
+#       - name: Run Cypress tests
+#         run: npx cypress run
+
+#       - name: Install Allure
+#         run: npm install -D allure-commandline
+
+#       - name: Load test report history
+#         uses: actions/checkout@v3
+#         if: always()
+#         continue-on-error: true
+#         with:
+#           ref: gh-pages
+#           path: gh-pages
+
+#       - name: Build test report
+#         uses: simple-elf/allure-report-action@v1.7
+#         if: always()
+#         with:
+#           gh_pages: gh-pages
+#           allure_history: allure-history
+#           allure_results: build/allure-results
+
+#       - name: Publish report
+#         uses: peaceiris/actions-gh-pages@v3
+#         if: always()
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           publish_branch: gh-pages
+#           publish_dir: allure-history
+
+
+
+
+
+
+
+
+
+
+
+
 
       # - name: Generate Allure Report
       #   run: |
