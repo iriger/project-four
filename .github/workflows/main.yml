@@ -25,6 +25,8 @@ jobs:
 
       - name: run Cypress tests
         run: npx cypress run
+        env:
+          ${{CYPRESS_BASE_URL}}
 
       - name: Install Allure
         run: npm install -D allure-commandline
